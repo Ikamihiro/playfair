@@ -42,9 +42,7 @@ void menu() {
     printf("|++++++++++++++++++++++++++++++++++++++++++++++++++++++++++|\n");
     printf("|                                                          |\n");
     printf("|             1 - Criptografar uma mensagem                |\n");
-    printf("|            2 - Descriptografar uma mensagem              |\n");
-    printf("|                3 - Histórico de ações                    |\n");
-    printf("|                       4 - Sair                           |\n");
+    printf("|                       2 - Sair                           |\n");
     printf("|                                                          |\n");
     printf("|++++++++++++++++++++++++++++++++++++++++++++++++++++++++++|\n");
     printf("Digite sua opção: ");
@@ -469,9 +467,9 @@ int main() {
             getchar();
 
             // pegando o path que o usuário digitar
-            printf("+++ ATENÇÃO +++\n");
-            printf("\nDigite o caminho do arquivo onde está a mensagem. \nCaso queria testar, digite o nome do arquivo 'mensagem.txt'\n");
-            printf("\nDigite aqui: ");
+            printf("\n+++ ATENÇÃO +++\n");
+            printf("Digite o caminho do arquivo onde está a mensagem. \nCaso queria testar, digite o nome do arquivo 'mensagem.txt'\n");
+            printf("Digite aqui: ");
             caminhoLeitura = ler_linha();
 
             if(caminhoLeitura != NULL) {
@@ -497,24 +495,20 @@ int main() {
                 printf("Se não, digite qualquer número que o algoritmo sobrescreverá o arquivo 'mensagem.txt'\n");
                 scanf("%d", &opcaoEscrita);
                 if(opcaoEscrita == 0) {
+                    getchar();
+                    printf("Digite o caminho: ");
                     caminhoEscrita = ler_linha();
                     gravar_arquivo(caminhoEscrita, mensagemEcriptada);
                 }
                 else gravar_arquivo(caminhoLeitura, mensagemEcriptada);
             }
         }
-        else if(opcao == 2) {
-            //descriptografar();
-        }
-        else if(opcao == 3) {
-            //mostrar_historico();
-        }
-        else if(opcao != 4) {
+        else if(opcao != 2) {
             printf("\nOpção errada amigo...\nTente novamente, por favor!\n");
             getchar();
         }
 
-    } while(opcao != 4);
+    } while(opcao != 2);
     
     return 0;
 }

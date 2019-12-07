@@ -139,12 +139,15 @@ char* ler_arquivo(char *path) {
         c = getc(file);
         dados[posicao] = c;
 
+        // essa função lê apenas uma linha
         if(c == '\n') { dados[posicao] = '\0'; break; }
 
+        // se o tamanho da linha execeder
         if(posicao >= bufsize) {
             bufsize += BUF_SIZE;
             dados = realloc(dados, bufsize);
 
+            // se houver erro de alocação
             if(!dados) {
                 printf("Erro de alocação!\n");
                 printf("Só conseguimos ler parte dos dados...\nMe desculpa!\n");
@@ -154,6 +157,7 @@ char* ler_arquivo(char *path) {
         posicao++;
     } while(c != EOF);
 
+    // fecha o arquivo
     fclose(file);
     return dados;
 }
@@ -214,9 +218,8 @@ void limpar_espacos(char *str) {
     }
     else {
         for(int i = 0; i < tam; i++) {
-            if(str[i] != ' ') {
-                str[contador++] = str[i];
-            }
+            if(str[i] != ' ') // pega o espaço
+                str[contador++] = str[i]; // e joga fora
         }
         str[contador] = '\0';   
     }
@@ -238,6 +241,7 @@ void touppar(char *str) {
     else {
         for(int i = 0; i < tam; i++) {
             if(str[i] = toupper(str[i])) {
+                // pega os Y e substitui por X
                 if(str[i] == 'Y')
                     str[i] = 'X';
             }
@@ -254,19 +258,20 @@ void touppar(char *str) {
 char* tirar_repetidos(char *str) {
     int count = 0, k = 0, tam = strlen(str);
     if(tam <= 0) return NULL; // string vazia
+    // aloca um espaço para key formatada
     char *newStr = malloc(sizeof(char) * tam);
 
     for(int i = 0; i <= tam; i++) {
         for(int j = 0; j < tam; j++) {
-            if(str[i] == newStr[j]) count++;
+            if(str[i] == newStr[j]) count++; // ele conta os caracteres repetidos
         }
         if(count >= 1) {
             for(int x = 0; x < tam; x++) 
-                if(str[i] == newStr[x]) break;
+                if(str[i] == newStr[x]) break; // achou o repetido, pula
             newStr[k] = str[i];
         }
         else {
-            newStr[k] = str[i];
+            newStr[k] = str[i]; // se não for repetido, adiciona
             k++;
         }
         count = 0;
